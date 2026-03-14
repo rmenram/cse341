@@ -13,10 +13,10 @@ const port = process.env.PORT;
 //     res.send('Hello!');
 // });
 
-// app.use((req, res, next) => {
-// 	res.setHeader('Access-Control-Allow-Origin', '*');
-// 	next();
-// });
+app.use((req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	next();
+});
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.json());
