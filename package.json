@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "swagger": "node ./swagger.js"
   },
   "keywords": [],
   "author": "Ricardo Mendoza Ramos",
@@ -16,9 +17,11 @@
     "body-parser": "^2.2.2",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "mongodb": "^7.1.0"
+    "mongodb": "^7.1.0",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "swagger-autogen": "^2.23.7"
   }
 }
