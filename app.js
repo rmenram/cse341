@@ -19,6 +19,14 @@ const port = process.env.PORT;
 // 	next();
 // });
 
+// Get the host for Swagger based on the environment
+const isProduction = process.env.NODE_ENV === 'production';
+const host = isProduction ? process.env.RENDER_URL : `localhost:${port}`;
+
+// Set swagger document's host and schemes properties
+swaggerDocument.host = host;
+swaggerDocument.schemes = isProduction ? ['https'] : ['http']; // Use https in production
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(cors());
 app.use(bodyParser.json());
