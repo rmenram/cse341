@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Contacts API",
-    "description": "My cse341 Contacts API",
+    "title": "Movies API",
+    "description": "My cse341 Movies API",
     "version": "1.0.0"
   },
   "host": "localhost:8080",
@@ -13,7 +13,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "description": "Just a welcome to ensure the API is up and running.",
         "responses": {
           "200": {
             "description": "OK"
@@ -21,49 +21,73 @@
         }
       }
     },
-    "/contacts/": {
+    "/movies/": {
       "get": {
-        "description": "",
+        "tags": [],
+        "description": "Get all the movies in the collection.",
         "produces": [
           "application/json"
         ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [],
+        "description": "Add a movie doc to the movie collection.",
         "parameters": [
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
+                "title": {
+                  "example": "The Dark Knight"
                 },
-                "lastName": {
-                  "example": "any"
+                "year": {
+                  "example": 2008
                 },
-                "email": {
-                  "example": "any"
+                "rated": {
+                  "example": "PG-13"
                 },
-                "favoriteColor": {
-                  "example": "any"
+                "released": {
+                  "example": "2008-07-18"
                 },
-                "birthday": {
-                  "example": "any"
+                "runtimeMins": {
+                  "example": 152
+                },
+                "genre": {
+                  "example": ["Action", "Crime", "Drama"]
+                },
+                "director": {
+                  "example": "Christopher Nolan"
+                },
+                "actors": {
+                  "example": ["Christian Bale", "Heath Ledger", "Aaron Eckhart"]
+                },
+                "plot": {
+                  "example": "When the menace known as the Joker wreaks havoc on Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
                 }
               }
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -71,9 +95,10 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/movies/{id}": {
       "get": {
-        "description": "",
+        "tags": [],
+        "description": "Get a single doc from the movie collection using the movie id.",
         "produces": [
           "application/json"
         ],
@@ -88,11 +113,18 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [],
+        "description": "Use this endpoint to update a movie doc using an existing movie id.",
         "parameters": [
           {
             "name": "id",
@@ -101,25 +133,37 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "example": "any"
+                "title": {
+                  "example": "The Dark Knight"
                 },
-                "lastName": {
-                  "example": "any"
+                "year": {
+                  "example": 2008
                 },
-                "email": {
-                  "example": "any"
+                "rated": {
+                  "example": "PG-13"
                 },
-                "favoriteColor": {
-                  "example": "any"
+                "released": {
+                  "example": "2008-07-18"
                 },
-                "birthday": {
-                  "example": "any"
+                "runtimeMins": {
+                  "example": 152
+                },
+                "genre": {
+                  "example": ["Action", "Crime", "Drama"]
+                },
+                "director": {
+                  "example": "Christopher Nolan"
+                },
+                "actors": {
+                  "example": ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Ken Watanabe"]
+                },
+                "plot": {
+                  "example": "When the menace known as the Joker wreaks havoc on Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
                 }
               }
             }
@@ -135,7 +179,156 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [],
+        "description": "Use this endpoint to delete an existing movie doc using its movie id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/movies-rank/": {
+      "get": {
+        "tags": [],
+        "description": "This endpoint gets all the movies that have been watched/ranked. The ranking works on a 1-5 integer system. Your typical 5 star system.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [],
+        "description": "Add a movie doc to the movie watched/ranked collection.",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "The Dark Knight"
+                },
+                "year": {
+                  "example": 2008
+                },
+                "rated": {
+                  "example": "PG-13"
+                },
+                "stars": {
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/movies-rank/{id}": {
+      "get": {
+        "tags": [],
+        "description": "Get a single doc from the movie watched/ranked collection using the movie id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [],
+        "description": "Use this endpoint to update a movie doc in the movie watched/ranked collection using an existing movie id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "The Dark Knight"
+                },
+                "year": {
+                  "example": 2008
+                },
+                "rated": {
+                  "example": "PG-13"
+                },
+                "stars": {
+                  "example": 5
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [],
+        "description": "Use this endpoint to delete an existing movie doc from the movie watched/ranked collection using its movie id.",
         "parameters": [
           {
             "name": "id",
@@ -154,5 +347,6 @@
         }
       }
     }
-  }
+  },
+  "definitions": {}
 }
