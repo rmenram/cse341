@@ -13,7 +13,8 @@
   "paths": {
     "/": {
       "get": {
-        "description": "Just a welcome to ensure the API is up and running.",
+        "tags": ["Welcome"],
+        "description": "Are we logged in or logged out?",
         "responses": {
           "200": {
             "description": "OK"
@@ -23,7 +24,7 @@
     },
     "/movies/": {
       "get": {
-        "tags": [],
+        "tags": ["Movies"],
         "description": "Get all the movies in the collection.",
         "produces": [
           "application/json"
@@ -42,7 +43,7 @@
         }
       },
       "post": {
-        "tags": [],
+        "tags": ["Movies"],
         "description": "Add a movie doc to the movie collection.",
         "parameters": [
           {
@@ -97,7 +98,7 @@
     },
     "/movies/{id}": {
       "get": {
-        "tags": [],
+        "tags": ["Movies"],
         "description": "Get a single doc from the movie collection using the movie id.",
         "produces": [
           "application/json"
@@ -123,7 +124,7 @@
         }
       },
       "put": {
-        "tags": [],
+        "tags": ["Movies"],
         "description": "Use this endpoint to update a movie doc using an existing movie id.",
         "parameters": [
           {
@@ -179,7 +180,7 @@
         }
       },
       "delete": {
-        "tags": [],
+        "tags": ["Movies"],
         "description": "Use this endpoint to delete an existing movie doc using its movie id.",
         "parameters": [
           {
@@ -201,7 +202,7 @@
     },
     "/movies-rank/": {
       "get": {
-        "tags": [],
+        "tags": ["Ranks"],
         "description": "This endpoint gets all the movies that have been watched/ranked. The ranking works on a 1-5 integer system. Your typical 5 star system.",
         "produces": [
           "application/json"
@@ -220,7 +221,7 @@
         }
       },
       "post": {
-        "tags": [],
+        "tags": ["Ranks"],
         "description": "Add a movie doc to the movie watched/ranked collection.",
         "parameters": [
           {
@@ -260,7 +261,7 @@
     },
     "/movies-rank/{id}": {
       "get": {
-        "tags": [],
+        "tags": ["Ranks"],
         "description": "Get a single doc from the movie watched/ranked collection using the movie id.",
         "produces": [
           "application/json"
@@ -286,7 +287,7 @@
         }
       },
       "put": {
-        "tags": [],
+        "tags": ["Ranks"],
         "description": "Use this endpoint to update a movie doc in the movie watched/ranked collection using an existing movie id.",
         "parameters": [
           {
@@ -327,7 +328,7 @@
         }
       },
       "delete": {
-        "tags": [],
+        "tags": ["Ranks"],
         "description": "Use this endpoint to delete an existing movie doc from the movie watched/ranked collection using its movie id.",
         "parameters": [
           {

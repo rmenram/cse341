@@ -1,5 +1,6 @@
 const rankController = require('../controllers/movies-rank');
 const rankValidate = require('../utilities/movie-validation');
+const { isAuthenticated } = require('../utilities/authenticate');
 
 const router = require('express').Router();
 
@@ -10,10 +11,10 @@ router.get('/', rankController.getAll);
 router.get('/:id', rankController.getSingle);
 
 // Route definition with validation middleware and error handler
-router.post('/', rankValidate.rankRules, rankValidate.handleValidationErrors, rankController.createMovie);
+router.post('/', isAuthenticated, rankValidate.rankRules, rankValidate.handleValidationErrors, rankController.createMovie);
 
-router.put('/:id', rankController.updateMovie);
+router.put('/:id', isAuthenticated, rankController.updateMovie);
 
-router.delete('/:id', rankController.deleteMovie);
+router.delete('/:id', isAuthenticated, rankController.deleteMovie);
 
 module.exports = router;
