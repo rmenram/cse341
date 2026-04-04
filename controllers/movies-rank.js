@@ -59,29 +59,41 @@ const createMovie = async (req, res) => {
 };
 
 const updateMovie = async (req, res) => {
-  const movieId = new ObjectId(req.params.id);
-  const movie = {
-    title: req.body.title,
-    year: req.body.year,
-    rated: req.body.rated,
-    stars: req.body.stars
-  };
-  const response = await mongodb.getDatabase().db('project01').collection('movies_rank').replaceOne({ _id: movieId }, movie);
-    if (response.modifiedCount > 0) {
-    res.status(204).send();
-  } else {
-    res.status(500).json(response.error || 'Some error occurred while updating the movie watched/rank.');
-  }
+  try {
+    const movieId = new ObjectId(req.params.id);
+    const movie = {
+      title: req.body.title,
+      year: req.body.year,
+      rated: req.body.rated,
+      stars: req.body.stars
+    };
+    const response = await mongodb.getDatabase().db('project01').collection('movies_rank').replaceOne({ _id: movieId }, movie);
+      if (response.modifiedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(500).json(response.error || 'Some error occurred while updating the movie watched/rank.');
+    }
+  } catch (error) {
+    // 4. Catch errors (e.g., db connection issues)
+    console.error('Error updating movie watched/rank:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }  
 };
 
 const deleteMovie = async (req, res) => {
-  const movieId = new ObjectId(req.params.id);
-  const response = await mongodb.getDatabase().db('project01').collection('movies_rank').deleteOne({ _id: movieId });
-  if (response.deletedCount > 0) {
-    res.status(204).send();
-  } else {
-    res.status(500).json(response.error || 'Some error occurred while deleting the movie watched/rank.');
-  }
+  try {
+    const movieId = new ObjectId(req.params.id);
+    const response = await mongodb.getDatabase().db('project01').collection('movies_rank').deleteOne({ _id: movieId });
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(500).json(response.error || 'Some error occurred while deleting the movie watched/rank.');
+    }
+  } catch (error) {
+    // 4. Catch errors (e.g., db connection issues)
+    console.error('Error deleting movie watched/rank:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }    
 };
 
 module.exports = { getAll, getSingle, createMovie, updateMovie, deleteMovie };

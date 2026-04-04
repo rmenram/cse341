@@ -13,7 +13,7 @@ router.get('/:id', movieController.getSingle);
 // Route definition with validation middleware and error handler
 router.post('/', isAuthenticated, movieValidate.movieRules, movieValidate.handleValidationErrors, movieController.createMovie);
 
-router.put('/:id', isAuthenticated, movieController.updateMovie);
+router.put('/:id', isAuthenticated, movieValidate.movieRules, movieValidate.handleValidationErrors, movieController.updateMovie);
 
 router.delete('/:id', isAuthenticated, movieController.deleteMovie);
 
